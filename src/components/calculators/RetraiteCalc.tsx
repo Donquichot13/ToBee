@@ -51,7 +51,7 @@ export default function RetraiteCalc() {
         {[
           { label: 'Revenus retraite estimés', value: formatEuro(r.revenusRetraite), sub: '= revenus ÷ 2' },
           { label: 'Gap mensuel à combler', value: formatEuro(r.gap), sub: 'manque à gagner' },
-          { label: 'Durée d'épargne', value: `${r.duree} ans`, sub: `jusqu'à ${profile.ageDepart} ans` },
+          { label: "Durée d'épargne", value: `${r.duree} ans`, sub: `jusqu'à ${profile.ageDepart} ans` },
           { label: 'Capital cible', value: formatEuro(r.capitalCible), sub: '25 ans de retraite' },
         ].map(({ label, value, sub }) => (
           <div key={label} className="bg-ivory rounded-xl p-4">
