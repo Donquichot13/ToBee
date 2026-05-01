@@ -2,7 +2,7 @@ import { useProfileStore } from '../../store/profileStore'
 import { calcEtudes, formatEuro } from '../../utils/calculations'
 
 export default function EtudesCalc() {
-  const { profile, setProfile } = useProfileStore()
+  const { profile } = useProfileStore()
 
   return (
     <div className="bg-paper border border-line rounded-2xl p-7">
