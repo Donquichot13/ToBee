@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useProfileStore } from '../store/profileStore'
 import { formatEuro } from '../utils/calculations'
 import { useNavigate } from 'react-router-dom'
