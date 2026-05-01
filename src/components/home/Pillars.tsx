@@ -26,7 +26,7 @@ const piliers = [
     num: '04',
     icon: '🏥',
     titre: 'Dépendance',
-    desc: 'Anticiper les coûts de perte d'autonomie (12 000 € à 42 000 €/an).',
+    desc: "Anticiper les coûts de perte d'autonomie (12 000 € à 42 000 €/an).",
     href: '/matrice',
   },
   {
