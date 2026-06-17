@@ -2,9 +2,13 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { UserProfile, Pilier } from '../types'
 
+type Parcours = 'simple' | 'expert' | null
+
 interface ProfileState {
   profile: UserProfile
   wizardStep: number
+  parcours: Parcours
+  setParcours: (p: Parcours) => void
   setProfile: (updates: Partial<UserProfile>) => void
   setWizardStep: (step: number) => void
   toggleObjectif: (pilier: Pilier) => void
@@ -28,6 +32,8 @@ export const useProfileStore = create<ProfileState>()(
     (set) => ({
       profile: defaultProfile,
       wizardStep: 1,
+      parcours: null,
+      setParcours: (p) => set({ parcours: p }),
       setProfile: (updates) =>
         set((state) => ({ profile: { ...state.profile, ...updates } })),
       setWizardStep: (step) => set({ wizardStep: step }),
@@ -43,7 +49,7 @@ export const useProfileStore = create<ProfileState>()(
             },
           }
         }),
-      reset: () => set({ profile: defaultProfile, wizardStep: 1 }),
+      reset: () => set({ profile: defaultProfile, wizardStep: 1, parcours: null }),
     }),
     { name: 'tobee-profile' }
   )
