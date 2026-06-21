@@ -14,7 +14,7 @@ export default function Matrix() {
     <main className="min-h-screen py-16 px-8 md:px-12">
       <div className="max-w-4xl mx-auto">
         {/* En-tête — masqué en mode sélection */}
-        {parcours !== null && (
+        {!!parcours && (
           <div className="mb-12">
             <div className="flex items-center justify-between">
               <div>
@@ -49,7 +49,7 @@ export default function Matrix() {
         )}
 
         {/* SÉLECTION DU PARCOURS */}
-        {parcours === null && (
+        {!parcours && (
           <ChoixParcours onChoix={(p) => setParcours(p)} />
         )}
 
