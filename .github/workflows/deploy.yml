@@ -1,4 +1,4 @@
-name: Deploy ToBee to GitHub Pages
+name: Deploy ToBee
 
 on:
   push:
@@ -30,12 +30,18 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload artifact
+      - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
-  deploy:
+      - name: Upload dist for SFTP job
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+  deploy-pages:
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -45,3 +51,24 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-sftp:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Deploy to SFTP
+        uses: wangyucode/sftp-upload-action@v2.0.0
+        with:
+          host: access824368903.webspace-data.io
+          port: 22
+          username: u100638852
+          password: ${{ secrets.SFTP_PASSWORD }}
+          localDir: './dist'
+          remoteDir: '/httpdocs/'
+          forceUpload: true
