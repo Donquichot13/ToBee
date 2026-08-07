@@ -26,6 +26,7 @@ export interface UserProfile {
   objectifs: Pilier[]
   ageDepart: number
   tmi: number
+  revenusConjoint: number
 }
 
 export interface CalcResult {

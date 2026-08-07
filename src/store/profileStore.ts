@@ -25,6 +25,7 @@ const defaultProfile: UserProfile = {
   objectifs: [],
   ageDepart: 67,
   tmi: 30,
+  revenusConjoint: 0,
 }
 
 export const useProfileStore = create<ProfileState>()(

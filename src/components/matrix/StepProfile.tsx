@@ -107,24 +107,64 @@ export default function StepProfile({ onNext }: { onNext: () => void }) {
         </div>
 
         {/* Revenus */}
-        <div>
-          <label className="text-xs font-semibold tracking-widest uppercase text-moss block mb-3">
-            Revenus mensuels nets — <span className="font-mono text-gold-deep">{profile.revenus.toLocaleString('fr-FR')} €</span>
-          </label>
-          <input
-            type="range"
-            min={500}
-            max={20000}
-            step={100}
-            value={profile.revenus}
-            onChange={(e) => setProfile({ revenus: +e.target.value })}
-            className="w-full accent-forest"
-          />
-          <div className="flex justify-between text-xs text-moss mt-1">
-            <span>500 €</span>
-            <span>20 000 €</span>
+        {(profile.situation === 'marie' || profile.situation === 'pacse') ? (
+          <div className="space-y-5">
+            <p className="text-xs font-semibold tracking-widest uppercase text-moss">
+              Revenus mensuels nets — <span className="text-gold-deep font-mono">
+                {(profile.revenus + profile.revenusConjoint).toLocaleString('fr-FR')} € total
+              </span>
+            </p>
+            <div className="bg-paper border border-line rounded-2xl p-5">
+              <label className="text-xs text-moss block mb-2">
+                Conjoint 1 — <span className="font-mono text-ink">{profile.revenus.toLocaleString('fr-FR')} €/mois</span>
+              </label>
+              <input
+                type="range"
+                min={500}
+                max={20000}
+                step={100}
+                value={profile.revenus}
+                onChange={(e) => setProfile({ revenus: +e.target.value })}
+                className="w-full accent-forest"
+              />
+              <div className="flex justify-between text-xs text-moss mt-1"><span>500 €</span><span>20 000 €</span></div>
+            </div>
+            <div className="bg-paper border border-line rounded-2xl p-5">
+              <label className="text-xs text-moss block mb-2">
+                Conjoint 2 — <span className="font-mono text-ink">{profile.revenusConjoint.toLocaleString('fr-FR')} €/mois</span>
+              </label>
+              <input
+                type="range"
+                min={0}
+                max={20000}
+                step={100}
+                value={profile.revenusConjoint}
+                onChange={(e) => setProfile({ revenusConjoint: +e.target.value })}
+                className="w-full accent-forest"
+              />
+              <div className="flex justify-between text-xs text-moss mt-1"><span>0 €</span><span>20 000 €</span></div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>
+            <label className="text-xs font-semibold tracking-widest uppercase text-moss block mb-3">
+              Revenus mensuels nets — <span className="font-mono text-gold-deep">{profile.revenus.toLocaleString('fr-FR')} €</span>
+            </label>
+            <input
+              type="range"
+              min={500}
+              max={20000}
+              step={100}
+              value={profile.revenus}
+              onChange={(e) => setProfile({ revenus: +e.target.value })}
+              className="w-full accent-forest"
+            />
+            <div className="flex justify-between text-xs text-moss mt-1">
+              <span>500 €</span>
+              <span>20 000 €</span>
+            </div>
+          </div>
+        )}
 
         {/* TMI */}
         <div>
