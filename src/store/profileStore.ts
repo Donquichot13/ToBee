@@ -52,6 +52,16 @@ export const useProfileStore = create<ProfileState>()(
         }),
       reset: () => set({ profile: defaultProfile, wizardStep: 1, parcours: null }),
     }),
-    { name: 'tobee-profile' }
+    {
+      name: 'tobee-profile',
+      merge: (persisted, current) => ({
+        ...current,
+        ...(persisted as Partial<ProfileState>),
+        profile: {
+          ...current.profile,
+          ...((persisted as Partial<ProfileState>).profile ?? {}),
+        },
+      }),
+    }
   )
 )

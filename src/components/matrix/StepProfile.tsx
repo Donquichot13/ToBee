@@ -19,7 +19,8 @@ const professions: { v: Profession; l: string }[] = [
 ]
 
 export default function StepProfile({ onNext }: { onNext: () => void }) {
-  const { profile, setProfile } = useProfileStore()
+  const { profile: rawProfile, setProfile } = useProfileStore()
+  const profile = { ...rawProfile, revenusConjoint: rawProfile.revenusConjoint ?? 0 }
 
   const addEnfant = () =>
     setProfile({
